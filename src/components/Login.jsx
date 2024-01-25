@@ -33,8 +33,11 @@ export default function Login() {
     .then(res => res.json())
     .then(data => {
       // Storing tokens in local storage
-      localStorage.setItem('access_token', data.access_token);
-      localStorage.setItem('refresh_token', data.refresh_token);
+    document.cookie = `access_token=${data.access_token}; path=/; HttpOnly; Secure; SameSite=Strict;`;
+    document.cookie = `refresh_token=${data.refresh_token}; path=/; HttpOnly; Secure; SameSite=Strict;`;
+
+      // localStorage.setItem('access_token', data.access_token);
+      // localStorage.setItem('refresh_token', data.refresh_token);
 
       navigate('/Dashboard')
     });
