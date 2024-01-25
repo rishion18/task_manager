@@ -15,7 +15,9 @@ export default function Login() {
     setPassword(val)
   }
 
+
   const navigate = useNavigate();
+
 
   const getTokensOnLogin = () => {
     fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
@@ -33,7 +35,8 @@ export default function Login() {
       // Storing tokens in local storage
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('refresh_token', data.refresh_token);
-      navigate('/Dashboard');
+
+      navigate('/Dashboard')
     });
   };
   
