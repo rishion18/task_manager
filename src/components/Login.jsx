@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
@@ -13,6 +14,8 @@ export default function Login() {
   const handlePassWord = (val) => {
     setPassword(val)
   }
+
+  const navigate = useNavigate();
 
   const getTokensOnLogin = () => {
     fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
@@ -30,6 +33,7 @@ export default function Login() {
       // Storing tokens in local storage
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('refresh_token', data.refresh_token);
+      navigate('/Dashboard');
     });
   };
   
