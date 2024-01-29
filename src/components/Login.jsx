@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -22,6 +22,7 @@ export default function Login() {
   const getTokensOnLogin = () => {
     fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
       method: 'POST',
+      // mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -39,6 +40,38 @@ export default function Login() {
       navigate('/Dashboard')
     });
   };
+
+  const checkRefreshToken = () => {
+    const storedRefreshToken = localStorage.getItem('refresh_token');
+    if (!storedRefreshToken) {
+      navigate('/');  // if refresh token is not stored -> navigate to login page 
+      return false; 
+    } else {
+      fetch(`https://api.escuelajs.co/api/v1/auth/refresh-token`, {  // fetching new tokens as refresh token is found
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "refreshToken": storedRefreshToken
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          localStorage.setItem('access_token', data.access_token);   // updateing both tokens
+          localStorage.setItem('refresh_token', data.refresh_token);
+        });
+        return true;
+    }
+  };
+
+  useEffect(() => {
+    const refreshToken = checkRefreshToken()
+    if(refreshToken){
+      navigate('/Dashboard');
+    }
+  } , [])
+  
   
 
   
@@ -98,7 +131,7 @@ export default function Login() {
               <div>
                 <button
                  onClick={getTokensOnLogin}
-                  type="submit"
+                 type="button"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Sign in
