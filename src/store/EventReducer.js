@@ -61,7 +61,7 @@ const EventReducerSlice = createSlice({
     taskChecker: (state) => {
 
       const allTasks = localStorage.getItem('tasks');
-      if(allTasks !== undefined){
+      if (allTasks !== null && allTasks !== undefined) {
         state.tasks = JSON.parse(allTasks);
       }
 
