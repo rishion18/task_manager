@@ -29,19 +29,7 @@ const SubTaskCard = ({ subtask , taskId }) => {
         </button>
         </div>
       </div>
-      <div
-        className={`${
-          toggle
-            ? 'absolute top-full bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4 right-0'
-            : 'hidden'
-        }`}
-        id="dropdown"
-      >
-        <div class="px-4 py-3">
-          <span class="block text-sm font-medium text-gray-900 truncate">{subtask.subTaskDesc}</span>
-        </div>
 
-      </div>
     </div>
   );
 };
