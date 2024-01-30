@@ -4,6 +4,7 @@ const EventReducerSlice = createSlice({
     name: 'EventReducerSlice',
     initialState: {
       tasks: [],
+      profileDetails:[]
     },
     reducers: {
       setTasks: (state, action) => {
@@ -111,6 +112,10 @@ const EventReducerSlice = createSlice({
         localStorage.setItem('tasks', JSON.stringify(newTasks));
       }
     },
+
+    setProfileData:(state , action) => {
+      state.profileDetails = action.payload
+    }
     
      
     }
@@ -123,7 +128,8 @@ export const {
               taskChecker , 
               moveToAnotherList,
               deleteTask,
-              setRenderTasks
+              setRenderTasks,
+              setProfileData
             } = EventReducerSlice.actions;
 
 export default EventReducerSlice.reducer;

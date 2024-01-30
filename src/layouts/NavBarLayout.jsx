@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setTasks } from '../store/EventReducer';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import UserProfile from '../components/UserProfile';
 
 
 const NavBarLayout = ({children , title}) => {
@@ -48,10 +49,6 @@ const [formData, setFormData] = useState({
     navigate('/Dashboard');
   }
 
-  const Logout = () => {
-    localStorage.clear();
-    navigate('/');
-  }
 
   return (
     <div className='w-screen h-screen'>
@@ -64,9 +61,7 @@ const [formData, setFormData] = useState({
             <button onClick={navToAllEvents}  class="bg-slate-300 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-full">
                 All Events
             </button>
-            <button onClick={Logout} class="bg-slate-300 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-full">
-                Logout
-            </button>
+            <UserProfile/>
         </div>
 
         <label htmlFor="menu-toggle" className="pointer-cursor md:hidden block">
