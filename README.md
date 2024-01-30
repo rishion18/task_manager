@@ -1,5 +1,9 @@
 Deployed app - https://task-manager-alpha-coral.vercel.app/
 
+1. To Log Out -  Click on Profile picture
+
+2. Dropdowns in app - all dropdowns in app are toggled - you have to click on it again 
+
 Please use
 {
   "email": "john@mail.com",
